@@ -1,10 +1,10 @@
-""" Default python decorator implementation. """
-
 import functools
 
-
+##################################################
+# Simple Function Decorator Template
+##################################################
 def decorator(func):
-    """Simple decorator without arguments"""
+    """Function decorator without arguments"""
 
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
@@ -19,8 +19,12 @@ def decorator(func):
 def func(a,b):
     return a+b
 
-def repeat(num_times):
+##################################################
+# Function With Arguments Decorator Template
+##################################################
 
+def repeat(num_times):
+    """Function decorator with arguments"""
     def decorator_with_arguments(func):
 
         @functools.wraps(func)
@@ -37,3 +41,21 @@ def repeat(num_times):
 @repeat(num_times=4)
 def greet(name):
     print(f'Hello {name}')
+
+##################################################
+# Class Decorator Template
+##################################################
+class CountCalls:
+
+    def __init__(self, func):
+        self.func = func
+        self.num_calls = 0
+
+    def __call__(self, *args, **kwargs):
+        self.num_calls += 1
+        print(f'This is executed {self.num_calls} times')
+        return self.func(*args, **kwargs)
+
+@CountCalls
+def say_hello():
+    print('Hello')
