@@ -56,6 +56,7 @@ class CountCalls:
         print(f'This is executed {self.num_calls} times')
         return self.func(*args, **kwargs)
 
+
 @CountCalls
 def say_hello():
     print('Hello')
